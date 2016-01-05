@@ -14,6 +14,7 @@
   "license": "BSD-3-Clause",
   "dependencies": {},
   "devDependencies": {
+    "babel-eslint": "^4.1.6",
     "eslint": "^1.9.0",
     "eslint-config-airbnb": "^1.0.0",
     "eslint-plugin-react": "^3.8.0"
