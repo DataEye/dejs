@@ -9,11 +9,7 @@
  * timer.cancel()
  */
 
-const STOPPED = 1
-
-const CANCELLED = 2
-
-const RUNNING = 3
+import {STOPPED, CANCELLED, RUNNING} from './const.js'
 
 function attempt(fn, context, args) {
   if (typeof fn !== 'function') return null

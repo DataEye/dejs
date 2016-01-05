@@ -28,4 +28,4 @@ node_modules
 
 .idea
 
-assets-build
+tmp
