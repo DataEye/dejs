@@ -32,7 +32,7 @@ export function mockModule(mod) {
 
 export function init(opts) {
   for (let key in mockConfig) {
-    if (opts.hasOwnPropperty(key)) {
+    if (opts.hasOwnProperty(key)) {
       mockConfig[key] = opts[key]
     }
   }
