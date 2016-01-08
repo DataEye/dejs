@@ -24,13 +24,18 @@ mock.post = function(url, callback) {
   mockPOST(mockConfig.appContextPath + url, callback)
 }
 
-export function mockModule(mod) {
+mock.all = function(url, callback) {
+  mockGet(mockConfig.appContextPath + url, callback)
+  mockPOST(mockConfig.appContextPath + url, callback)
+}
+
+function mockModule(mod) {
   for (let funcName in mod) {
     mod[funcName](mock)
   }
 }
 
-export function init(opts) {
+export default function init(modules = [], opts = {}) {
   for (let key in mockConfig) {
     if (opts.hasOwnProperty(key)) {
       mockConfig[key] = opts[key]
@@ -40,6 +45,10 @@ export function init(opts) {
   if (opts.timeout) {
     mock.timeout = opts.timeout
   }
+
+  modules.forEach((mod) => {
+    mockModule(mod)
+  })
 
   return mock
 }
