@@ -1,50 +1,72 @@
 /**
- * ajax请求中间件
+ * redux ajax middle ware
+ * flux standard action
  */
 
 import ajax from '../ajax'
 
-let SUFFIX = {
+let request = ajax
+
+export let SUFFIX = {
   OK: 'ok',
   ERR: 'error'
 }
 
+// 使用自定义的ajax函数
+export function createAjax(xhr = ajax) {
+  request = xhr
+}
+
+// action format
+// {
+//   type,
+//   payload, (post data or Error instance)
+//   error, (boolean)
+//   meta: {
+//     ajax: true,
+//     url: string,
+//     method: string (get/post),
+//     original: original action data
+//   }
+// }
 export default store => next => action => {
-  if (action.meta && action.meta.ajax) {
-    if (!action.meta.url) {
-      throw new Error(`action:${action.type}缺少meta.url`)
-    }
-
-    let formData = action.payload || {}
-    if (formData.statusCode || formData.content) {
-      throw new Error(`ajax middleware验证错误，POST数据不能包含statusCode和content字段`)
-    }
-
-    // ajax动作发起
+  if (!action.meta || !action.meta.ajax) {
     next(action)
-
-    ajax({
-      url: action.meta.url,
-      method: 'post',
-      body: formData,
-      success: (json) => {
-        store.dispatch({
-          type: action.type + '_' + SUFFIX.OK,
-          // 客户端请求提交的表单数据直接覆盖json
-          payload: Object.assign(json, action.payload)
-        })
-      },
-      fail: (err) => {
-        store.dispatch({
-          type: action.type + '_' + SUFFIX.ERR,
-          payload: err,
-          error: true
-        })
-      }
-    })
-
     return
   }
+
+  let {url, method, original} = action.meta
+  if (!url) {
+    throw new Error(`action:${action.type}缺少meta.url`)
+  }
+
+  // ajax动作发起
+  next(action)
+
+  request({
+    url: url,
+    method: method || 'post',
+    body: action.payload,
+    success: (json) => {
+      store.dispatch({
+        type: action.type + '_' + SUFFIX.OK,
+        payload: json,
+        meta: {
+          original
+        }
+      })
+    },
+    fail: (err) => {
+      store.dispatch({
+        type: action.type + '_' + SUFFIX.ERR,
+        payload: err,
+        error: true,
+        meta: {
+          original
+        }
+      })
+    }
+  })
 
   next(action)
 }
