@@ -56,12 +56,9 @@ export default function ajax(opts) {
 
   if (succHandler || errorHandler) {
     req.end((err, res) => {
-      if (err) {
-        console.log(err)
-      }
-
       if (!err && succHandler) {
-        succHandler(res.body, res)
+        // body只有在接口未post时才有
+        succHandler(res.body || res.text, res)
       } else if (err && errorHandler) {
         errorHandler(err, res)
       }
@@ -80,9 +77,23 @@ export default function ajax(opts) {
         res.req = req
         resolve(res)
       } else {
-        console.log(err)
         reject(err)
       }
     })
+  })
+}
+
+export function get(url, success) {
+  return ajax({
+    url,
+    success
+  })
+}
+export function post(url, data, success) {
+  return ajax({
+    url,
+    method: 'post',
+    data,
+    success
   })
 }
