@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react'
+import NoData from '../no-data/index.jsx'
 import _ from 'lodash'
+import Immutable from 'immutable'
 import * as ChartHelpers from './utils'
 
 if (typeof Highcharts === 'undefined') {
@@ -28,17 +30,49 @@ export default React.createClass({
     }
   },
 
+  /**
+   * 第一次mount的时候初始化数据肯定为空
+   * 数据一般都是通过ajax请求更新
+   */
   componentDidMount() {
-    let chartConfig = this.props.config.chart
-    let isPie = chartConfig && chartConfig.type === 'pie'
-    this.renderChart(isPie ? this.getPieOptions() : this.getOptions())
+    if (this.props.datalist.length) {
+      this.renderChart()
+    }
+  },
+
+  componentWillUnmount() {
+    this.chart = null
+  },
+
+  /**
+   * render之后如果数据不为空则绘图
+   * 绘图仍然需要比较前后数据是否一致
+   * 只在数据真正变化的时候绘图
+   */
+  componentDidUpdate(prevProps, prevState) {
+    if (this.props.datalist.length) {
+      let current = Immutable.fromJS(this.props)
+      let next = Immutable.fromJS(prevProps)
+      if (!Immutable.is(current, next)) {
+        this.renderChart()
+      }
+    }
   },
 
   render() {
-    return <div ref="chart"></div>
+    // 清除上一次highcharts引用
+    if (!this.props.datalist.length) {
+      this.chart = null
+      return <NoData />
+    }
+
+    return <div ref="chart" style={{minHeight: '360px'}}></div>
   },
 
-  renderChart(config) {
+  renderChart() {
+    let chartConfig = this.props.config.chart
+    let isPie = chartConfig && chartConfig.type === 'pie'
+    let config = isPie ? this.getPieOptions() : this.getOptions()
     config.chart.renderTo = this.refs.chart
     // 外部组件使用
     this.chart = new Highcharts.Chart(config)
