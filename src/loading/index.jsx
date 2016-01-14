@@ -56,17 +56,22 @@ export default React.createClass({
   },
 
   render() {
-    const loadingTips = (
+    /**
+     * 之前的写法props改变会引起子组件重新mount
+     * cotent = this.props.done ? children : [loading, children]
+     */
+    const loadingTips = this.props.done ? null : (
       <div style={STYLE.MASK}>
         <div style={STYLE.LOADING}>
           <i className="fa fa-spinner fa-pulse" style={STYLE.SPINNER}></i>
         </div>
       </div>
     )
-    let content = this.props.done ? this.props.children : [loadingTips, this.props.children]
+
     return (
       <div style={STYLE.CONTAINER}>
-        {content}
+        {loadingTips}
+        {this.props.children}
       </div>
     )
   }
