@@ -197,7 +197,7 @@ export const DEFAULT_PIE_OPTIONS = {
 export function defaultTooltipFormatter(json, rowData, config) {
   // 用户可能取消某些曲线的展示，这个时候points仅为部分数据
   let points = this.points || [this.point]
-  let indexes = points.map((p) => p.series.i)
+  let indexes = points.map((p) => p.series.index)
   let html = ''
   // 如果没有手动指定排序，则展示行数据的所有yN,zN,tN
   // 默认不展示x和id，可以自己加入到tooltipOrderList中
