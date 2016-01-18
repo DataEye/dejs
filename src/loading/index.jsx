@@ -14,7 +14,8 @@ import React, {PropTypes} from 'react'
 
 const STYLE = {
   CONTAINER: {
-    position: 'relative'
+    position: 'relative',
+    minHeight: '300px'
   },
   MASK: {
     position: 'absolute',
