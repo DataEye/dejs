@@ -212,11 +212,12 @@ export function defaultTooltipFormatter(json, rowData, config) {
     let rawValue = isExtra ? config.tooltipExtraData[key][1] : rowData[key]
     // 只有yN才会在y轴显示
     let index = key[0] === 'y' && parseInt(key.slice(1), 10)
+    let pointIndex = _.indexOf(indexes, index)
     // 用户屏蔽某些曲线的展示
-    if (key[0] === 'y' && !_.contains(indexes, index)) return
+    if (key[0] === 'y' && pointIndex === -1) return
 
     // 可能显示z0或t0
-    let series = index ? points[index].series : {
+    let series = pointIndex !== -1 ? points[pointIndex].series : {
       color: '',
       type: 'empty',
       name: json.name[key] || config.tooltipExtraData[key][0]

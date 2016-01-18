@@ -33,7 +33,7 @@
     "spaced-comment": 0,
     "vars-on-top": 0,
     "id-length": 0,
-    "no-magic-numbers": 2,
+    "no-magic-numbers": 0,
     "object-curly-spacing": [2, "never"],
     "space-in-parens": [2, "never"],
     "space-after-keywords": [2, "always"],
