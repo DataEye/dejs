@@ -195,7 +195,9 @@ export const DEFAULT_PIE_OPTIONS = {
  * TODO 数据过多时的处理方式（分组还有其他逻辑？）
  */
 export function defaultTooltipFormatter(json, rowData, config) {
+  // 用户可能取消某些曲线的展示，这个时候points仅为部分数据
   let points = this.points || [this.point]
+  let indexes = points.map((p) => p.series.i)
   let html = ''
   // 如果没有手动指定排序，则展示行数据的所有yN,zN,tN
   // 默认不展示x和id，可以自己加入到tooltipOrderList中
@@ -209,7 +211,10 @@ export function defaultTooltipFormatter(json, rowData, config) {
 
     let rawValue = isExtra ? config.tooltipExtraData[key][1] : rowData[key]
     // 只有yN才会在y轴显示
-    let index = key[0] === 'y' && key.slice(1)
+    let index = key[0] === 'y' && parseInt(key.slice(1), 10)
+    // 用户屏蔽某些曲线的展示
+    if (key[0] === 'y' && !_.contains(indexes, index)) return
+
     // 可能显示z0或t0
     let series = index ? points[index].series : {
       color: '',
