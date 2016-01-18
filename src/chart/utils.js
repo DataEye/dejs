@@ -198,12 +198,13 @@ export function defaultTooltipFormatter(json, rowData, config) {
   let points = this.points || [this.point]
   let html = ''
   // 如果没有手动指定排序，则展示行数据的所有yN,zN,tN
-  let tooltipFields = config.tooltipOrderList || _.keys(rowData).sort().filter(key => key !== 'x')
+  // 默认不展示x和id，可以自己加入到tooltipOrderList中
+  let tooltipFields = config.tooltipOrderList || _.keys(rowData).sort().filter((k) => k !== 'id' && k !== 'x')
   _.each(tooltipFields, (key) => {
     // 检查是否插入了自定义的数据，确认自定义数据已经配置
     let isExtra = !json.name[key]
     if (isExtra && (!config.tooltipExtraData || !config.tooltipExtraData[key][0])) {
-      throw new Error(`key:${key}不存在对应的名称，没有配置tooltipExtraData?`)
+      throw new Error(`行数据的${key}没有找到对应的json.name.${key};或tooltipExtraData没有配置对应的数据项`)
     }
 
     let rawValue = isExtra ? config.tooltipExtraData[key][1] : rowData[key]
