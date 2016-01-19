@@ -12,6 +12,7 @@
   "scripts": {
     "build": "./node_modules/.bin/gulp",
     "cover": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
+    "prepare": "npm install superagent",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "files": [
