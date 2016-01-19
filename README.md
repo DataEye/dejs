@@ -1,5 +1,8 @@
 # dejs
+
 A collection of utility libraries used by other DataEye JS projects.
+
+[![Build Status](https://semaphoreci.com/api/v1/projects/feb269cb-570b-4836-a5a8-c9eec1d324eb/665759/badge.svg)](https://semaphoreci.com/damngoto/dejs)
 
 ## Component List
 

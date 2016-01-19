@@ -9,24 +9,10 @@ let mockConfig = {
   appContextPath: ''
 }
 
-const mock = App.useMock ? mocker(request) : {
+let mock = {
   post: function() {},
-  get: function() {}
-}
-const mockGet = mock.get
-const mockPOST = mock.post
-
-mock.get = function(url, callback) {
-  mockGet(mockConfig.appContextPath + url, callback)
-}
-
-mock.post = function(url, callback) {
-  mockPOST(mockConfig.appContextPath + url, callback)
-}
-
-mock.all = function(url, callback) {
-  mockGet(mockConfig.appContextPath + url, callback)
-  mockPOST(mockConfig.appContextPath + url, callback)
+  get: function() {},
+  all: function() {}
 }
 
 function mockModule(mod) {
@@ -36,6 +22,23 @@ function mockModule(mod) {
 }
 
 export default function init(modules = [], opts = {}) {
+  mock = mocker(request)
+  const mockGet = mock.get
+  const mockPOST = mock.post
+
+  mock.get = function(url, callback) {
+    mockGet(mockConfig.appContextPath + url, callback)
+  }
+
+  mock.post = function(url, callback) {
+    mockPOST(mockConfig.appContextPath + url, callback)
+  }
+
+  mock.all = function(url, callback) {
+    mockGet(mockConfig.appContextPath + url, callback)
+    mockPOST(mockConfig.appContextPath + url, callback)
+  }
+
   for (let key in mockConfig) {
     if (opts.hasOwnProperty(key)) {
       mockConfig[key] = opts[key]

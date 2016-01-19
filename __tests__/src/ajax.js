@@ -1,4 +1,4 @@
-import ajax, {get, post} from '../../src/ajax'
+import ajax, {get, post} from '../../lib/ajax'
 
 describe('ajax', () => {
   beforeEach(() => {

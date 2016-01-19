@@ -56,7 +56,10 @@ export default store => next => action => {
         }
       })
     },
-    fail: (err) => {
+    fail: (err, res) => {
+      if (res.body) {
+        err.statusCode = res.body.statusCode
+      }
       store.dispatch({
         type: action.type + '_' + SUFFIX.ERR,
         payload: err,

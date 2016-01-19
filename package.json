@@ -38,6 +38,7 @@
     "karma": "^0.13.14",
     "karma-browserify": "^4.4.2",
     "karma-chrome-launcher": "^0.2.1",
+    "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6"
   },
   "bugs": {
