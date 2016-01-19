@@ -89,6 +89,7 @@ export function get(url, success) {
     success
   })
 }
+
 export function post(url, data, success) {
   return ajax({
     url,

@@ -10,7 +10,8 @@
     "dataeye"
   ],
   "scripts": {
-    "build": "./node_modules/.bin/gulp"
+    "build": "./node_modules/.bin/gulp",
+    "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "author": "simonxu",
   "license": "BSD-3-Clause",
@@ -20,17 +21,24 @@
     "lodash": "^3.10.1",
     "superagent": "1.4.0",
     "superagent-mocker": "0.3.0",
-    "numeral": "1.5.3"
+    "numeral": "latest",
+    "immutable": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
     "eslint": "^1.9.0",
     "eslint-config-airbnb": "^1.0.0",
     "eslint-plugin-react": "^3.8.0",
     "gulp": "^3.9.0",
-    "gulp-babel": "^6.1.1"
+    "gulp-babel": "^6.1.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.14",
+    "karma-browserify": "^4.4.2",
+    "karma-chrome-launcher": "^0.2.1",
+    "karma-jasmine": "^0.3.6"
   },
   "bugs": {
     "url": "https://github.com/DataEye/dejs/issues"
