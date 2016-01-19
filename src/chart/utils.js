@@ -4,6 +4,10 @@
 import _ from 'lodash'
 import * as utils from '../utils'
 
+if (typeof Highcharts === 'undefined') {
+  throw new Error('Highcharts is not bundled by default, load highcharts script by yourself.')
+}
+
 const COLORS = [
   '#4da1ff', '#f4533c', '#ffae00', '#1aba9b', '#e552b0', '#af6bcb', '#9aab4f', '#6673d1', '#3ebb43',
   '#2c81e1', '#dd4544', '#e49518', '#0c967b', '#bd3998', '#944cb2', '#7b8d43', '#4e5ab0', '#299e2e',

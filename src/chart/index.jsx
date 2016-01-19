@@ -4,10 +4,6 @@ import _ from 'lodash'
 import Immutable from 'immutable'
 import * as ChartHelpers from './utils'
 
-if (typeof Highcharts === 'undefined') {
-  throw new Error('Highcharts is not bundled by default, load highcharts script by yourself.')
-}
-
 export default React.createClass({
   propTypes: {
     // 原始数据源
