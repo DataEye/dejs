@@ -1,6 +1,6 @@
 {
   "name": "dejs",
-  "version": "0.2.9",
+  "version": "0.3.0",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",
@@ -13,6 +13,10 @@
     "build": "./node_modules/.bin/gulp",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
+  "files": [
+    "lib",
+    "src"
+  ],
   "author": "simonxu",
   "license": "BSD-3-Clause",
   "installable": true,
