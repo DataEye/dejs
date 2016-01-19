@@ -54,13 +54,16 @@ export default function ajax(opts) {
     req.withCredentials()
   }
 
-  if (succHandler || errorHandler) {
+  if (succHandler || errorHandler || completeHandler) {
     req.end((err, res) => {
-      if (!err && succHandler) {
-        // body只有在接口未post时才有
-        succHandler(res.body || res.text, res)
-      } else if (err && errorHandler) {
-        errorHandler(err, res)
+      if (err) {
+        if (typeof errorHandler === 'function') {
+          errorHandler(err, res)
+        }
+      } else {
+        if (typeof succHandler === 'function') {
+          succHandler(res.body || res.text, res)
+        }
       }
 
       if (completeHandler) {
@@ -91,10 +94,11 @@ export function get(url, success) {
 }
 
 export function post(url, data, success) {
+  let hasNoDataPost = typeof data === 'function'
   return ajax({
     url,
     method: 'post',
-    data,
-    success
+    data: hasNoDataPost ? null : data,
+    success: hasNoDataPost ? data : success
   })
 }

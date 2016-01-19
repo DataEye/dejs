@@ -3,7 +3,7 @@
   "env": {
     "browser": true,
     "node": true,
-    "jest": true
+    "jasmine": true
   },
   "ecmaFeatures": {
     "jsx": true
@@ -42,6 +42,7 @@
   },
   "globals": {
     "Highcharts": true,
-    "App": true
+    "App": true,
+    "jasmine": true
   }
 }
