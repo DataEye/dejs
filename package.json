@@ -17,12 +17,12 @@
   "license": "BSD-3-Clause",
   "installable": true,
   "dependencies": {
-    "react": "0.14.3",
+    "react": "^0.14.3",
     "lodash": "^3.10.1",
-    "superagent": "1.4.0",
-    "superagent-mocker": "0.3.0",
-    "numeral": "latest",
-    "immutable": "latest"
+    "superagent": "^1.4.0",
+    "superagent-mocker": "^0.3.0",
+    "numeral": "*",
+    "immutable": "*"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
