@@ -25,10 +25,10 @@
   "peerDependencies": {
     "react": "^0.14.3",
     "lodash": "^3.10.1",
-    "superagent": "^1.4.0",
-    "superagent-mocker": "^0.3.0",
-    "numeral": "*",
-    "immutable": "*"
+    "superagent": "latest",
+    "superagent-mocker": "latest",
+    "numeral": "latest",
+    "immutable": "latest"
   },
   "devDependencies": {
     "babel-eslint": "^4.1.6",
