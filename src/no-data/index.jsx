@@ -15,14 +15,16 @@ const STYLE = {
   }
 }
 
+export const DEFAULT_TIP = '暂无数据'
+
 export default React.createClass({
   propTypes: {
-    noDataText: PropTypes.string
+    text: PropTypes.string
   },
 
   getDefaultProps() {
     return {
-      noDataText: '暂无数据'
+      text: DEFAULT_TIP
     }
   },
 
@@ -34,7 +36,7 @@ export default React.createClass({
     return (
       <div style={STYLE.CONTAINER}>
         <i className="fa fa-exclamation-circle" style={STYLE.ICON}></i>
-        <div>{this.props.noDataText}</div>
+        <div>{this.props.text}</div>
       </div>
     )
   }

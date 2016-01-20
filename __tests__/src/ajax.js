@@ -4,7 +4,7 @@ ajaxSetup({
   contextPath: '/testing'
 })
 
-describe('ajax', () => {
+describe('lib/ajax', () => {
   beforeEach(() => {
     jasmine.Ajax.install()
   })
