@@ -1,6 +1,6 @@
 {
   "name": "dejs",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",
@@ -12,7 +12,7 @@
   "scripts": {
     "build": "./node_modules/.bin/gulp",
     "cover": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
-    "prepare": "npm install superagent",
+    "prepare": "npm install react lodash superagent superagent-mocker numeral immutable",
     "test": "./node_modules/karma/bin/karma start karma.conf.js"
   },
   "files": [
@@ -23,8 +23,8 @@
   "license": "BSD-3-Clause",
   "installable": true,
   "peerDependencies": {
-    "react": "^0.14.3",
-    "lodash": "^3.10.1",
+    "react": "0.14.x",
+    "lodash": "3.x.x",
     "superagent": "latest",
     "superagent-mocker": "latest",
     "numeral": "latest",
