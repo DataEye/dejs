@@ -57,8 +57,10 @@ export default store => next => action => {
       })
     },
     fail: (err, res) => {
-      // 把响应结果全部赋值到err对象上
-      Object.assign(err, res.body)
+      // 如果错误请求有输出，把响应结果全部赋值到err对象上
+      if (res && res.body) {
+        Object.assign(err, res.body)
+      }
 
       store.dispatch({
         type: action.type + '_' + SUFFIX.ERR,

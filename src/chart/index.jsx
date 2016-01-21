@@ -3,6 +3,7 @@ import NoData from '../no-data/index'
 import _ from 'lodash'
 import Immutable from 'immutable'
 import * as ChartHelpers from './utils'
+import Highcharts from 'highcharts'
 
 export default React.createClass({
   propTypes: {
