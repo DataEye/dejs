@@ -3,9 +3,14 @@
  */
 import _ from 'lodash'
 import * as utils from '../utils'
+import Highcharts from 'highcharts'
 
 if (typeof Highcharts === 'undefined') {
-  throw new Error('Highcharts is not bundled by default, load highcharts script by yourself.')
+  throw new Error(`
+    Highcharts has been optimized for npm, see these links for help.
+    http://www.highcharts.com/component/content/article/2-news/188-highcharts-optimized-for-npm
+    http://www.hcharts.cn/subject/highcharts-4.1.10.php
+  `)
 }
 
 const COLORS = [
