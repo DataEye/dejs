@@ -154,6 +154,9 @@ export const DEFAULT_PIE_OPTIONS = {
   title: {
     text: ''
   },
+  lengend: {
+    enabled: false
+  }
   tooltip: {
     backgroundColor: 'rgba(41, 55, 69, 0.8)',
     borderColor: '#010202',
