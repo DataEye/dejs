@@ -39,22 +39,22 @@ export function getExposedModule(mod) {
 
 // 转换为两位数的百分比
 export function asPercentage(num) {
-  return numeral(num || 0).format('(0.00%)')
+  return num === 'N/A' ? num : numeral(num || 0).format('(0.00%)')
 }
 
 // 转换为浮点数字形式，保留两位有效数字
 export function asNumber(num) {
-  return numeral(num || 0).format(`0,0.00`)
+  return num === 'N/A' ? num : numeral(num || 0).format(`0,0.00`)
 }
 
 // 转换为数字，千分位
 export function asInteger(num) {
-  return numeral(num || 0).format(`0,0`)
+  return num === 'N/A' ? num : numeral(num || 0).format(`0,0`)
 }
 
 // 转换为货币形式，保留两位小数点
 export function asCurrency(num, currency = '￥') {
-  return currency + asNumber(num)
+  return num === 'N/A' ? num : currency + asNumber(num)
 }
 
 export function parseUri(uri) {
