@@ -167,6 +167,9 @@ export const DEFAULT_PIE_OPTIONS = {
     },
     percentageDecimals: 1
   },
+  legend: {
+    enabled: false
+  },
   // legend: {
   //   borderWidth: 0,
   //   // layout: 'vertical',
