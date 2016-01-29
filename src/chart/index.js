@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import NoData from '../no-data/index'
+import NoData from '../no-data'
 import _ from 'lodash'
 import Immutable from 'immutable'
 import * as ChartHelpers from './utils'
