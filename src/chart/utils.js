@@ -4,6 +4,7 @@
 import _ from 'lodash'
 import * as utils from '../utils'
 import Highcharts from 'highcharts'
+import STYLE from './style.js'
 
 if (typeof Highcharts === 'undefined') {
   throw new Error(`
@@ -156,7 +157,7 @@ export const DEFAULT_PIE_OPTIONS = {
   },
   lengend: {
     enabled: false
-  }
+  },
   tooltip: {
     backgroundColor: 'rgba(41, 55, 69, 0.8)',
     borderColor: '#010202',
@@ -240,19 +241,20 @@ export function defaultTooltipFormatter(json, rowData, config) {
 
     // y轴value格式化函数
     let value = config.tooltipValueFormatter ? config.tooltipValueFormatter(rawValue, key) : (rawValue || 0)
+    const tipDotStyle = _.assign({background: series.color}, STYLE.DOT)
     html += `
     <li>
-      <span style="background: ${series.color}" class="${series.type}"></span>
+      <span style="float: right">${value}</span>
+      <span style=${tipDotStyle}></span>
       ${series.name}:
-      <span>${value}</span>
     </li>
     `
   })
 
   return `
-    <h5 class="tip-title">${this.x}</h5>
-    <div class="tip-content">
-      <ul class="tip-list">${html}</ul>
+    <h5 style=${STYLE.TIP_TITLE}>${this.x}</h5>
+    <div style=${STYLE.TIP_CONTENT}>
+      <ul style=${STYLE.TIP_LIST}>${html}</ul>
     </div>
   `
 }
