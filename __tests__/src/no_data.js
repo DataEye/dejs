@@ -1,7 +1,7 @@
 import React from 'react'
 import TestUtils from 'react-addons-test-utils'
 import * as libUtils from './__utils'
-import NoData, {DEFAULT_TIP} from '../../src/no-data/index.jsx'
+import NoData, {DEFAULT_TIP} from '../../src/no-data'
 
 describe('lib/no-data', () => {
   it('should render default text', () => {
