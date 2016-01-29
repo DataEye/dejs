@@ -31,6 +31,7 @@
     "immutable": "*"
   },
   "devDependencies": {
+    "babel-core": "6.x.x",
     "babel-eslint": "^4.1.6",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
