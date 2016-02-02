@@ -4,6 +4,7 @@
  */
 
 import ajax from '../ajax'
+import _ from 'lodash'
 
 let request = ajax
 
@@ -59,7 +60,7 @@ export default store => next => action => {
     fail: (err, res) => {
       // 如果错误请求有输出，把响应结果全部赋值到err对象上
       if (res && res.body) {
-        Object.assign(err, res.body)
+        _.assign(err, res.body)
       }
 
       store.dispatch({
