@@ -242,9 +242,9 @@ export function defaultTooltipFormatter(json, rowData, config) {
     let value = config.tooltipValueFormatter ? config.tooltipValueFormatter(rawValue, key) : (rawValue || 0)
     html += `
     <li>
-      <span style="float: right">${value}</span>
       <span style="background: ${series.color}; width: 5px; height: 5px; border-radius: 100px; font-size: 0; overflow: hidden;"></span>
-      ${series.name}:
+      <span>${series.name}: </span>
+      <span >${value}</span>
     </li>
     `
   })
