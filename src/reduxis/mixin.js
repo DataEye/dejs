@@ -2,6 +2,7 @@
  * A base mixin for redux based component
  */
 import {PropTypes} from 'react'
+import _ from 'lodash'
 
 export default {
   propTypes: {
@@ -28,7 +29,7 @@ export default {
       return
     }
 
-    actionHandler(Object.assign({
+    actionHandler(_.assign({
       componentID: this.props.id
     }, payload))
   },
