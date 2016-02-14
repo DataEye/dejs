@@ -280,6 +280,7 @@ export function transform2PieData(data) {
  * yAxisFormatter {Function} 【独占】y轴value格式化函数，接收2个额外的参数（y轴value、曲线名称y0,y1等）
  * yAxisLabelsFormatter {Function} 【独占（左右两侧）】纵坐标格式化，接收2个额外的参数（曲线名称、曲线索引）
  * yAxisOppositeList {Array} 指定那些曲线位于右侧 ['y0', 'y1']
+ * yAxisMultiple {Boolean} 是否允许多Y轴（每个曲线一个Y轴），默认只允许双Y轴
  * seriesNameList {Array<String>} 曲线名称
  * seriesTypeList {Array<String>} 曲线类型
  * seriesColorList {Array<String>} 曲线颜色
@@ -337,13 +338,17 @@ export function transform2LineData(data, extraOptions) {
   let yAxis = []
   let defaultSerieType = (extraOptions.chart && extraOptions.chart.type) || 'line'
   _.each(yAxisList, (item, i) => {
-    // 使用哪个y轴（仅双或多y轴时有效）
-    let index = 0
-    // 是否在右侧的y轴
+    /**
+     * yAxisIndex 用于指定曲线在哪个Y轴
+     * 如果要多Y轴那么yAxisIndex只需指定不同的值即可
+     * 如果只允许两个Y轴，一个0，一个1即可
+     */
+    let yAxisIndex = 0
     let opposite = false
     if (_.isArray(extraOptions.yAxisOppositeList)) {
       opposite = _.contains(extraOptions.yAxisOppositeList, yAxisKeys[i])
-      index = i
+      let targetIndex = extraOptions.yAxisMultiple ? i : 1
+      yAxisIndex = opposite ? targetIndex : 0
     }
     // y轴格式化，额外传递当前曲线的全部数据，以及曲线的对应的name，index
     let yAxisLabelsFormatter = extraOptions.yAxisLabelsFormatter && function() {
@@ -358,7 +363,7 @@ export function transform2LineData(data, extraOptions) {
       color: utils.tryGet(extraOptions.seriesColorList, i),
       visible: utils.tryGet(extraOptions.seriesVisibleList, i) || true,
       stack: seriesStack && seriesStack['y' + i],
-      yAxis: index,
+      yAxis: yAxisIndex,
       events: {
         click: extraOptions.onClick
       }
@@ -376,7 +381,9 @@ export function transform2LineData(data, extraOptions) {
       allowDecimals: !!utils.tryGet(extraOptions.allowDecimals, i),
       labels: {
         style: {
-          fontFamily : 'Arial, "微软雅黑", "宋体"'
+          fontFamily : 'Arial, "微软雅黑", "宋体"',
+          // 多Y轴才展示颜色，不然颜色和曲线对不上
+          color: extraOptions.yAxisMultiple && COLORS[i]
         },
         formatter: yAxisLabelsFormatter
       }
