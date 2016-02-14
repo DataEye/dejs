@@ -48,7 +48,8 @@ function stackParser(config, names) {
 
 export const DEFAULT_LINE_OPTIONS = {
   chart : {
-    backgroundColor : 'rgba(0, 0, 0, 0)'
+    backgroundColor : 'rgba(0, 0, 0, 0)',
+    type: 'areaspline'
   },
   title : {
     text : ''
@@ -241,10 +242,10 @@ export function defaultTooltipFormatter(json, rowData, config) {
     // y轴value格式化函数
     let value = config.tooltipValueFormatter ? config.tooltipValueFormatter(rawValue, key) : (rawValue || 0)
     html += `
-    <li>
-      <span style="background: ${series.color}; width: 5px; height: 5px; border-radius: 100px; font-size: 0; overflow: hidden;"></span>
+    <li style="width:200px; list-style:none; padding: 2px 0">
+      <span style="float:right;">${value}</span>
+      <span style="margin:6px 5px 0 0;float:left;background: ${series.color}; width: 5px; height: 5px; border-radius: 100px; font-size: 0; overflow: hidden;"></span>
       <span>${series.name}: </span>
-      <span >${value}</span>
     </li>
     `
   })
