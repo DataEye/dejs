@@ -1,6 +1,6 @@
 {
   "name": "dejs",
-  "version": "0.4.6",
+  "version": "0.4.8",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",

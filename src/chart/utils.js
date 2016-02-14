@@ -48,8 +48,7 @@ function stackParser(config, names) {
 
 export const DEFAULT_LINE_OPTIONS = {
   chart : {
-    backgroundColor : 'rgba(0, 0, 0, 0)',
-    type: 'areaspline'
+    backgroundColor : 'rgba(0, 0, 0, 0)'
   },
   title : {
     text : ''
@@ -336,7 +335,7 @@ export function transform2LineData(data, extraOptions) {
   })
   let series = []
   let yAxis = []
-  let defaultSerieType = (extraOptions.chart && extraOptions.chart.type) || 'line'
+  let defaultSerieType = (extraOptions.chart && extraOptions.chart.type) || 'spline'
   _.each(yAxisList, (item, i) => {
     /**
      * yAxisIndex 用于指定曲线在哪个Y轴
