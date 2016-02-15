@@ -21,7 +21,7 @@ export default React.createClass({
       seriesNames: {},
       config: {
         chart: {
-          type: 'line'
+          type: ChartHelpers.DEFAULT_LINE_TYPE
         }
       }
     }

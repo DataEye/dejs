@@ -46,6 +46,8 @@ function stackParser(config, names) {
   return ret
 }
 
+export const DEFAULT_LINE_TYPE = 'spline'
+
 export const DEFAULT_LINE_OPTIONS = {
   chart : {
     backgroundColor : 'rgba(0, 0, 0, 0)'
@@ -335,7 +337,7 @@ export function transform2LineData(data, extraOptions) {
   })
   let series = []
   let yAxis = []
-  let defaultSerieType = (extraOptions.chart && extraOptions.chart.type) || 'line'
+  let defaultSerieType = (extraOptions.chart && extraOptions.chart.type) || DEFAULT_LINE_TYPE
   _.each(yAxisList, (item, i) => {
     /**
      * yAxisIndex 用于指定曲线在哪个Y轴
@@ -415,7 +417,7 @@ export function getLineOptions(data, options = {}) {
     series: lineData.series,
     chart: {
       // 图表类型，混合图的时候不需要指定type，在series里面指定type
-      type: 'line'
+      type: DEFAULT_LINE_TYPE
     },
     legend: {
       enabled : lineData.legendEnabled
