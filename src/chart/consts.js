@@ -3,7 +3,6 @@ const TOOLTIP_BASE_STYLE = `
   width:15px;
   margin:0 10px 0 0;
   vertical-align: middle;
-  border-radius: 100px;
   font-size: 0;
   overflow: hidden;
 `
