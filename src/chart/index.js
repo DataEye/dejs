@@ -4,6 +4,7 @@ import _ from 'lodash'
 import Immutable from 'immutable'
 import * as ChartHelpers from './utils'
 import Highcharts from 'highcharts'
+import CONST from './consts'
 
 export default React.createClass({
   propTypes: {
@@ -21,7 +22,7 @@ export default React.createClass({
       seriesNames: {},
       config: {
         chart: {
-          type: ChartHelpers.DEFAULT_LINE_TYPE
+          type: CONST.DEFAULT_LINE_TYPE
         }
       }
     }
@@ -81,7 +82,7 @@ export default React.createClass({
       name: this.props.seriesNames
     }, this.props.config)
     // NOTE Object.assign会导致tootip的this为空
-    return _.merge({}, ChartHelpers.DEFAULT_LINE_OPTIONS, options)
+    return _.merge({}, CONST.DEFAULT_LINE_OPTIONS, options)
   },
 
   // 饼图配置比较简单
@@ -90,6 +91,6 @@ export default React.createClass({
       content: this.props.datalist,
       name: this.props.seriesNames
     }, this.props.config)
-    return _.merge({}, ChartHelpers.DEFAULT_PIE_OPTIONS, options)
+    return _.merge({}, CONST.DEFAULT_PIE_OPTIONS, options)
   }
 })
