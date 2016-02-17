@@ -4,15 +4,8 @@
 import _ from 'lodash'
 import * as utils from '../utils'
 import CONST from './consts'
+import defaultTooltipFormatter from './tooltip_formatter'
 import Highcharts from 'highcharts'
-
-if (typeof Highcharts === 'undefined') {
-  throw new Error(`
-    Highcharts has been optimized for npm, see these links for help.
-    http://www.highcharts.com/component/content/article/2-news/188-highcharts-optimized-for-npm
-    http://www.hcharts.cn/subject/highcharts-4.1.10.php
-  `)
-}
 
 Highcharts.setOptions({
   colors: CONST.COLORS,
@@ -39,79 +32,6 @@ function stackParser(config, names) {
   })
 
   return ret
-}
-
-/**
- * 从point中获取serie相关信息
- * 主要用于在tooltip弹出时获取该点相关曲线类型
- * _colorIndex: 2
- * data: Array[5]
- * events: Object
- * name: "yuanlin2"
- * stack: null
- * type: "spline"
- * visible: true
- * yAxis: 0
- */
-function getSerieFromPoint(point) {
-  if (!point) return ''
-
-  let originalSeries = point.series.chart.options.series
-  let index = point.series.index
-  return originalSeries[index]
-}
-
-/**
- * TODO 数据过多时的处理方式（分组还有其他逻辑？）
- */
-export function defaultTooltipFormatter(json, rowData, config) {
-  // 用户可能取消某些曲线的展示，这个时候points仅为部分数据
-  let points = this.points || [this.point]
-  let indexes = points.map((p) => p.series.index)
-  let html = ''
-  // 如果没有手动指定排序，则展示行数据的所有yN,zN,tN
-  // 默认不展示x和id，可以自己加入到tooltipOrderList中
-  let tooltipFields = config.tooltipOrderList || _.keys(rowData).sort().filter((k) => k !== 'id' && k !== 'x')
-  _.each(tooltipFields, (key) => {
-    // 检查是否插入了自定义的数据，确认自定义数据已经配置
-    let isExtra = !json.name[key]
-    if (isExtra && (!config.tooltipExtraData || !config.tooltipExtraData[key][0])) {
-      throw new Error(`行数据的${key}没有找到对应的json.name.${key};或tooltipExtraData没有配置对应的数据项`)
-    }
-
-    let rawValue = isExtra ? config.tooltipExtraData[key][1] : rowData[key]
-    // 只有yN才会在y轴显示
-    let index = key[0] === 'y' && parseInt(key.slice(1), 10)
-    let pointIndex = _.indexOf(indexes, index)
-    // 用户屏蔽某些曲线的展示
-    if (key[0] === 'y' && pointIndex === -1) return
-
-    // 可能显示z0或t0
-    let series = pointIndex !== -1 ? points[pointIndex].series : {
-      color: '',
-      type: 'empty',
-      name: json.name[key] || config.tooltipExtraData[key][0]
-    }
-
-    // y轴value格式化函数
-    let value = config.tooltipValueFormatter ? config.tooltipValueFormatter(rawValue, key) : (rawValue || 0)
-    let serieTypeStyle = getSerieFromPoint(points[pointIndex]).type === CONST.DEFAULT_LINE_TYPE ?
-      CONST.TOOLTIP_SPLINE_HEIGHT_ATTR : CONST.TOOLTIP_BASE_HEIGHT_ATTR
-    html += `
-    <li style="${CONST.TOOLTIP_LI_STYLE}">
-      <span style="float:right;">${value}</span>
-      <span style="background: ${series.color};${serieTypeStyle + CONST.TOOLTIP_BASE_STYLE}"></span>
-      <span>${series.name}: </span>
-    </li>
-    `
-  })
-
-  return `
-    <h5>${this.x}</h5>
-    <div>
-      <ul style="${CONST.TOOLTIP_UL_STYLE}">${html}</ul>
-    </div>
-  `
 }
 
 // 转换原始接口数据为饼图数据

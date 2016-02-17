@@ -1,5 +1,4 @@
 const TOOLTIP_BASE_STYLE = `
-  display: inline-block;
   width:15px;
   margin:0 10px 0 0;
   vertical-align: middle;
@@ -8,7 +7,7 @@ const TOOLTIP_BASE_STYLE = `
 `
 
 const TOOLTIP_LI_STYLE = `
-  width:200px; list-style:none;
+  list-style:none;
   padding: 2px 0
 `
 
@@ -17,8 +16,13 @@ const TOOLTIP_UL_STYLE = `
   margin: 0;
 `
 
+const TOOLTIP_SPAN_STYLE = `
+  display: inline-block;
+`
+
 export default {
   TOOLTIP_BASE_STYLE,
+  TOOLTIP_SPAN_STYLE,
   TOOLTIP_UL_STYLE,
   TOOLTIP_LI_STYLE,
   TOOLTIP_BASE_HEIGHT_ATTR: 'height: 12px;',
