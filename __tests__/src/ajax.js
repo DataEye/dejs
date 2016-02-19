@@ -1,6 +1,6 @@
 import ajax, {get, post, ajaxSetup, FORM_TYPE, TEXT_TYPE} from '../../src/ajax'
 
-const TIMEOUT = 10000
+const TIMEOUT = 20
 
 ajaxSetup({
   contextPath: '/testing',
@@ -204,14 +204,12 @@ describe('lib/ajax', () => {
 
   it('should support custom timeout', () => {
     let result = null
-    get('/').then((txt) => {
-      result = txt
-    })
-    jasmine.clock().tick(TIMEOUT/2)
-    expect(result).toBeNull()
-    jasmine.clock().tick(TIMEOUT/2)
-    expect(result).not.toBeNull()
+    let req = get('/', () => {})
+
+    jasmine.Ajax.requests.mostRecent().responseTimeout()
+    jasmine.clock().tick(TIMEOUT)
+    expect(req.timedout).toBe(true)
   })
 
-  // TODO timeout / withCredentials
+  // TODO withCredentials
 })
