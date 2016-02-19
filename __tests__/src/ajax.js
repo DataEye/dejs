@@ -1,6 +1,6 @@
 import ajax, {get, post, ajaxSetup, FORM_TYPE, TEXT_TYPE} from '../../src/ajax'
 
-cosnt TIMEOUT = 10000
+const TIMEOUT = 10000
 
 ajaxSetup({
   contextPath: '/testing',
