@@ -1,16 +1,21 @@
 import ajax, {get, post, ajaxSetup, FORM_TYPE, TEXT_TYPE} from '../../src/ajax'
 
+cosnt TIMEOUT = 10000
+
 ajaxSetup({
-  contextPath: '/testing'
+  contextPath: '/testing',
+  timeout: TIMEOUT
 })
 
 describe('lib/ajax', () => {
   beforeEach(() => {
     jasmine.Ajax.install()
+    jasmine.clock().install()
   })
 
   afterEach(() => {
     jasmine.Ajax.uninstall()
+    jasmine.clock().uninstall()
   })
 
   it('get method should get plain text', (done) => {
@@ -195,6 +200,17 @@ describe('lib/ajax', () => {
         done()
       }
     })
+  })
+
+  it('should support custom timeout', () => {
+    let result = null
+    get('/').then((txt) => {
+      result = txt
+    })
+    jasmine.clock().tick(TIMEOUT/2)
+    expect(result).toBeNull()
+    jasmine.clock().tick(TIMEOUT/2)
+    expect(result).not.toBeNull()
   })
 
   // TODO timeout / withCredentials

@@ -13,7 +13,7 @@
 
 import request from 'superagent/lib/client'
 
-export const DEFAULT_TIMEOUT = 10000
+export const DEFAULT_TIMEOUT = 15000
 
 export const FORM_TYPE = 'application/x-www-form-urlencoded; charset=UTF-8'
 
@@ -24,7 +24,8 @@ export const TEXT_TYPE = 'text/plain; charset=UTF-8'
 export const XML_TYPE = 'application/xml; charset=UTF-8'
 
 export let setupConfig = {
-  contextPath: ''
+  contextPath: '',
+  timeout: DEFAULT_TIMEOUT
 }
 
 export function ajaxSetup(opts) {
@@ -48,7 +49,7 @@ export default function ajax(opts) {
     req.set(key, headers[key])
   }
 
-  req.timeout(opts.timeout || DEFAULT_TIMEOUT)
+  req.timeout(opts.timeout || setupConfig.timeout)
 
   if (opts.withCredentials) {
     req.withCredentials()
