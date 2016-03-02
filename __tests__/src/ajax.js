@@ -2,13 +2,29 @@ import ajax, {get, post, ajaxSetup, FORM_TYPE, TEXT_TYPE} from '../../src/ajax'
 
 const TIMEOUT = 20
 
+let globalErrorTriggered = false
+let globalCompeteTriggered = false
+let globalSuccessTriggered = false
+
 ajaxSetup({
   contextPath: '/testing',
-  timeout: TIMEOUT
+  timeout: TIMEOUT,
+  ajaxComplete: function(err, res) {
+    globalCompeteTriggered = true
+  },
+  ajaxError: function(err, res) {
+    globalErrorTriggered = true
+  },
+  ajaxSuccess: function(result, res) {
+    globalSuccessTriggered = true
+  }
 })
 
 describe('lib/ajax', () => {
   beforeEach(() => {
+    globalErrorTriggered = false
+    globalCompeteTriggered = false
+    globalSuccessTriggered = false
     jasmine.Ajax.install()
     jasmine.clock().install()
   })
@@ -16,6 +32,31 @@ describe('lib/ajax', () => {
   afterEach(() => {
     jasmine.Ajax.uninstall()
     jasmine.clock().uninstall()
+  })
+
+  it('ajaxError should work', (done) => {
+    let json = {
+      statusCode: 410
+    }
+    jasmine.Ajax.stubRequest(/\/testing.+/).andReturn({
+      'status': 410,
+      'responseText': JSON.stringify(json),
+      'responseHeaders': {
+        'Content-Type': 'application/json'
+      }
+    })
+
+    ajax({
+      url: '/',
+      global: true,
+      error: () => {
+        expect(globalErrorTriggered).toBe(true)
+      },
+      complete: () => {
+        expect(globalErrorTriggered).toBe(true)
+        done()
+      }
+    })
   })
 
   it('get method should get plain text', (done) => {
@@ -102,6 +143,7 @@ describe('lib/ajax', () => {
     })
     let request = ajax({
       url: '/',
+      global: false,
       data: {withDataField: 1}
     })
     expect(typeof request.then).toBe('function')
@@ -128,12 +170,14 @@ describe('lib/ajax', () => {
     ajax({
       url: '/',
       method: 'get',
+      global: true,
       headers: {
         'Content-Type': TEXT_TYPE
       },
       body: {withBodyField: 1},
       success: () => {
         i += 1
+        expect(globalSuccessTriggered).toBe(true)
       },
       complete: () => {
         expect(i).toBe(1)
@@ -158,6 +202,7 @@ describe('lib/ajax', () => {
 
     ajax({
       url: '/',
+      global: false,
       headers: {
         'Content-Type': FORM_TYPE
       },
@@ -188,6 +233,7 @@ describe('lib/ajax', () => {
 
     ajax({
       url: '/',
+      global: false,
       headers: {
         'Content-Type': FORM_TYPE
       },
@@ -204,7 +250,11 @@ describe('lib/ajax', () => {
 
   it('should support custom timeout', () => {
     let result = null
-    let req = get('/', () => {})
+    let req = ajax({
+      url: '/',
+      global: false,
+      complete: () => {}
+    })
 
     jasmine.Ajax.requests.mostRecent().responseTimeout()
     jasmine.clock().tick(TIMEOUT)

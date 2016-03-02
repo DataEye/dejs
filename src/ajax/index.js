@@ -13,6 +13,10 @@
 
 import request from 'superagent/lib/client'
 
+function isFunction(fn) {
+  return fn && typeof fn === 'function'
+}
+
 export const DEFAULT_TIMEOUT = 15000
 
 export const FORM_TYPE = 'application/x-www-form-urlencoded; charset=UTF-8'
@@ -25,7 +29,11 @@ export const XML_TYPE = 'application/xml; charset=UTF-8'
 
 export let setupConfig = {
   contextPath: '',
-  timeout: DEFAULT_TIMEOUT
+  timeout: DEFAULT_TIMEOUT,
+  ajaxComplete: null,
+  ajaxError: null,
+  ajaxSuccess: null,
+  ajaxStart: null
 }
 
 export function ajaxSetup(opts) {
@@ -36,7 +44,7 @@ export function ajaxSetup(opts) {
   }
 }
 
-export default function ajax(opts) {
+export default function ajax(opts = {}) {
   let method = opts.method ? opts.method.toLowerCase() : 'get'
   let req = request[method](setupConfig.contextPath + opts.url, opts.data || opts.body)
   let headers = opts.headers || {
@@ -45,6 +53,8 @@ export default function ajax(opts) {
   let errorHandler = opts.fail || opts.error
   let succHandler = opts.success
   let completeHandler = opts.complete
+  let fireGlobals = opts.global !== false
+
   for (let key in headers) {
     req.set(key, headers[key])
   }
@@ -58,15 +68,25 @@ export default function ajax(opts) {
   if (succHandler || errorHandler || completeHandler) {
     req.end((err, res) => {
       if (err) {
-        if (typeof errorHandler === 'function') {
+        if (fireGlobals && isFunction(setupConfig.ajaxError)) {
+          setupConfig.ajaxError.call(req, err, res)
+        }
+        if (isFunction(errorHandler)) {
           errorHandler(err, res)
         }
       } else {
-        if (typeof succHandler === 'function') {
-          succHandler(res.body || res.text, res)
+        let result = res.body || res.text
+        if (fireGlobals && isFunction(setupConfig.ajaxSuccess)) {
+          setupConfig.ajaxSuccess.call(req, result, res)
+        }
+        if (isFunction(succHandler)) {
+          succHandler(result, res)
         }
       }
 
+      if (fireGlobals && isFunction(setupConfig.ajaxComplete)) {
+        setupConfig.ajaxComplete.call(req, err, res)
+      }
       if (completeHandler) {
         completeHandler(err, res)
       }
@@ -95,7 +115,7 @@ export function get(url, success) {
 }
 
 export function post(url, data, success) {
-  let hasNoDataPost = typeof data === 'function'
+  let hasNoDataPost = isFunction(data)
   return ajax({
     url,
     method: 'post',
