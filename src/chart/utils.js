@@ -154,7 +154,7 @@ export function transform2LineData(data, extraOptions) {
       gridLineColor: '#E0E0E0',
       gridLineDashStyle : 'Dash',
       //是否允许刻度有小数
-      allowDecimals: !!utils.tryGet(extraOptions.allowDecimals, i),
+      allowDecimals: !!extraOptions.allowDecimals,
       labels: {
         style: {
           fontFamily : 'Arial, "微软雅黑", "宋体"',
