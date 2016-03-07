@@ -159,9 +159,6 @@ export default {
       },
       percentageDecimals: 1
     },
-    legend: {
-      enabled: false
-    },
     plotOptions: {
       pie: {
         allowPointSelect: true,
