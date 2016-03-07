@@ -142,7 +142,9 @@ export default {
       text: ''
     },
     lengend: {
-      enabled: false
+      itemStyle: {
+        fontWeight: 'normal'
+      }
     },
     tooltip: {
       backgroundColor: 'rgba(41, 55, 69, 0.8)',
@@ -160,17 +162,6 @@ export default {
     legend: {
       enabled: false
     },
-    // legend: {
-    //   borderWidth: 0,
-    //   // layout: 'vertical',
-    //   verticalAlign: 'center',
-    //   align: 'center',
-    //   x: -10,
-    //   y: 0,
-    //   itemMarginTop: 5,
-    //   itemMarginBottom: 5,
-    //   enabled: true
-    // },
     plotOptions: {
       pie: {
         allowPointSelect: true,
@@ -181,7 +172,10 @@ export default {
           color: '#000000',
           connectorColor: '#000000',
           formatter: function() {
-            return '<b>' + this.point.name + '</b>: ' + (this.percentage).toFixed(2) + ' %'
+            return this.point.name + '<br/>' + (this.percentage).toFixed(2) + ' %'
+          },
+          style: {
+            fontWeight: 'normal'
           }
         },
         showInLegend: true,
