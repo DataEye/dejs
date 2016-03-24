@@ -99,8 +99,8 @@ export default function defaultTooltipFormatter(json, rowData, {tooltipOrderList
   })
 
   return `
-    <h5>${this.x}</h5>
-    <div>
+    <h5 style="margin-bottom: 8px;margin-top: 0;">${this.x}</h5>
+    <div style="border-top:1px solid rgba(122, 128, 138, 0.6);padding-top: 5px;">
       <ul style="${CONST.TOOLTIP_UL_STYLE}">${liList}</ul>
     </div>
   `
