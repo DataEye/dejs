@@ -169,7 +169,7 @@ export default {
           color: '#000000',
           connectorColor: '#000000',
           formatter: function() {
-            return this.point.name + '<br/>' + (this.percentage).toFixed(2) + ' %'
+            return this.point.name + ' ' + (this.percentage).toFixed(2) + ' %'
           },
           style: {
             fontWeight: 'normal'
