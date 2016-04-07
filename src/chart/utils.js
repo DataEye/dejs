@@ -122,7 +122,7 @@ export function transform2LineData(data, extraOptions) {
     let yAxisIndex = 0
     let opposite = false
     if (_.isArray(extraOptions.yAxisOppositeList)) {
-      opposite = _.contains(extraOptions.yAxisOppositeList, yAxisKeys[i])
+      opposite = _.includes(extraOptions.yAxisOppositeList, yAxisKeys[i])
       let targetIndex = extraOptions.yAxisMultiple ? i : 1
       yAxisIndex = opposite ? targetIndex : 0
     }

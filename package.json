@@ -1,6 +1,6 @@
 {
   "name": "dejs",
-  "version": "0.5.10",
+  "version": "0.5.11",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",
@@ -23,7 +23,7 @@
   "installable": true,
   "peerDependencies": {
     "react": "0.14.x",
-    "lodash": "3.x.x",
+    "lodash": "4.x.x",
     "highcharts": "^4.2.1",
     "superagent": "*",
     "superagent-mocker": "*",
