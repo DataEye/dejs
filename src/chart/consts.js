@@ -141,7 +141,7 @@ export default {
     title: {
       text: ''
     },
-    lengend: {
+    legend: {
       itemStyle: {
         fontWeight: 'normal'
       }
