@@ -6,7 +6,7 @@ gulp.task('css', () => {
     .pipe(gulp.dest('lib'))
 })
 
-gulp.task('default',['css'], () => {
+gulp.task('default', ['css'], () => {
   return gulp.src('src/**/*.js')
     .pipe(babel({
       presets: ['es2015', 'react']
