@@ -1,13 +1,15 @@
 {
   "name": "dejs",
-  "version": "0.5.13",
+  "version": "0.5.14",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/DataEye/dejs.git"
   },
   "keywords": [
-    "dataeye"
+    "dataeye",
+    "utils",
+    "react"
   ],
   "scripts": {
     "build": "node node_modules/gulp/bin/gulp",
@@ -22,9 +24,8 @@
   "license": "BSD-3-Clause",
   "installable": true,
   "peerDependencies": {
-    "react": "0.14.x",
-    "lodash": "4.x.x",
-    "highcharts": "^4.2.1",
+    "react": ">=0.14.0",
+    "lodash": "4.x",
     "superagent": "*",
     "superagent-mocker": "*",
     "numeral": "*",
@@ -51,7 +52,6 @@
     "karma-chrome-launcher": "^0.2.2",
     "karma-coverage": "^0.5.3",
     "karma-jasmine": "^0.3.6",
-    "pre-commit": "^1.1.2",
     "react-addons-test-utils": "0.14.x"
   },
   "bugs": {
@@ -59,7 +59,7 @@
   },
   "homepage": "https://github.com/DataEye/dejs#readme",
   "main": "index.js",
-  "pre-commit": [
+  "prepublish": [
     "build"
   ]
 }
