@@ -199,8 +199,11 @@ export function getLineOptions(data, options = {}) {
     },
     xAxis: {
       categories : lineData.categories,
-      // x轴的步长
-      tickInterval: lineData.tickInterval
+      // tickInterval: lineData.tickInterval,
+      labels: {
+        // x轴的步长
+        step: lineData.tickInterval
+      }
     },
     yAxis: lineData.yAxis,
     tooltip: {
