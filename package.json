@@ -1,6 +1,6 @@
 {
   "name": "dejs",
-  "version": "0.5.17",
+  "version": "0.5.18",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",
@@ -12,10 +12,10 @@
     "react"
   ],
   "scripts": {
-    "build": "node node_modules/gulp/bin/gulp",
-    "cover": "cat coverage/*/lcov.info | ./node_modules/codecov.io/bin/codecov.io.js",
+    "build": "gulp",
+    "cover": "cat coverage/*/lcov.info | codecov",
     "prepare": "npm install react lodash highcharts superagent superagent-mocker numeral immutable",
-    "test": "node node_modules/karma/bin/karma start karma.conf.js"
+    "test": "karma start karma.conf.js"
   },
   "files": [
     "lib"
