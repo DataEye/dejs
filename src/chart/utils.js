@@ -202,7 +202,10 @@ export function getLineOptions(data, options = {}) {
       // tickInterval: lineData.tickInterval,
       labels: {
         // x轴的步长
-        step: lineData.tickInterval
+        // step: lineData.tickInterval,
+        style: {
+          fontFamily: 'Arial, Microsoft YaHei'
+        }
       }
     },
     yAxis: lineData.yAxis,
