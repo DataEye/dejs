@@ -188,7 +188,7 @@ export function getPieOptions(data, options = {}) {
 // 生成曲线图、柱状图等配置
 export function getLineOptions(data, options = {}) {
   let lineData = transform2LineData(data, options)
-  return {
+  return _.merge({}, options, {
     series: lineData.series,
     chart: {
       // 图表类型，混合图的时候不需要指定type，在series里面指定type
@@ -237,5 +237,18 @@ export function getLineOptions(data, options = {}) {
         stacking : lineData.stacking
       }
     }
-  }
+  })
+}
+
+// 自定义饼图legend的symbol画图函数
+Highcharts.seriesTypes['pie'].prototype.drawLegendSymbol = function (legend, item) {
+  item.legendSymbol = this.chart.renderer.rect(
+    0, //方块的左上角点的x坐标
+    legend.baseline - 5, //方块的左上角点的y坐标
+    legend.options.symbolWidth || 16,   // 这个就是chart初始化参数中legend里设置的symbolWidth属性，是方块的宽
+    legend.options.symbolHeight || 2, // 方块的高
+    legend.options.symbolRadius || 2 // 圆角的半径
+  ).attr({
+    zIndex: 3
+  }).add(item.legendGroup);
 }
