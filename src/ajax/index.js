@@ -33,7 +33,8 @@ export let setupConfig = {
   ajaxComplete: null,
   ajaxError: null,
   ajaxSuccess: null,
-  ajaxStart: null
+  ajaxStart: null,
+  ajaxPrefilter: null
 }
 
 export function ajaxSetup(opts) {
@@ -45,6 +46,9 @@ export function ajaxSetup(opts) {
 }
 
 export default function ajax(opts = {}) {
+  if (isFunction(setupConfig.ajaxPrefilter)) {
+    setupConfig.ajaxPrefilter(opts)
+  }
   let method = opts.method ? opts.method.toLowerCase() : 'get'
   let req = request[method](setupConfig.contextPath + opts.url, opts.data || opts.body)
   let headers = opts.headers || {
@@ -66,6 +70,9 @@ export default function ajax(opts = {}) {
   }
 
   if (succHandler || errorHandler || completeHandler) {
+    if (isFunction(setupConfig.ajaxStart)) {
+      setupConfig.ajaxStart()
+    }
     req.end((err, res) => {
       if (err) {
         if (fireGlobals && isFunction(setupConfig.ajaxError)) {
@@ -96,6 +103,9 @@ export default function ajax(opts = {}) {
   }
 
   return new Promise(function(resolve, reject) {
+    if (isFunction(setupConfig.ajaxStart)) {
+      setupConfig.ajaxStart()
+    }
     req.end((err, res) => {
       if (!err) {
         res.req = req

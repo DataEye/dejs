@@ -9,6 +9,11 @@ let globalSuccessTriggered = false
 ajaxSetup({
   contextPath: '/testing',
   timeout: TIMEOUT,
+  ajaxPrefilter: function(opts) {
+    if (opts.data) {
+      opts.data.token = 'custom-token'
+    }
+  },
   ajaxComplete: function(err, res) {
     globalCompeteTriggered = true
   },
@@ -88,6 +93,7 @@ describe('lib/ajax', () => {
 
     post('/', {formData: 1}, function(body, res) {
       expect(body.statusCode).toBe(json.statusCode)
+      expect(res.req._data.token).toBe('custom-token')
       done()
     })
   })
