@@ -48,9 +48,7 @@ export default store => next => action => {
     url: url,
     method: method || 'post',
     body: action.payload,
-    headers: headers || {
-      'Content-Type': JSON_TYPE
-    },
+    headers: headers,
     success: (json) => {
       store.dispatch({
         type: action.type + '_' + SUFFIX.OK,
