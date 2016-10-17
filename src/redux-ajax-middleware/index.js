@@ -3,7 +3,7 @@
  * flux standard action
  */
 
-import ajax from '../ajax'
+import ajax, {JSON_TYPE} from '../ajax'
 import _ from 'lodash'
 
 let request = ajax
@@ -36,7 +36,7 @@ export default store => next => action => {
     return
   }
 
-  let {url, method, original} = action.meta
+  let {url, method, original, headers} = action.meta
   if (!url) {
     throw new Error(`action:${action.type}缺少meta.url`)
   }
@@ -48,6 +48,9 @@ export default store => next => action => {
     url: url,
     method: method || 'post',
     body: action.payload,
+    headers: headers || {
+      'Content-Type': JSON_TYPE
+    },
     success: (json) => {
       store.dispatch({
         type: action.type + '_' + SUFFIX.OK,
