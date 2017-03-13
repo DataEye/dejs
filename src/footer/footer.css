@@ -46,6 +46,25 @@
   overflow: hidden;
 }
 
+#footer .partner-inner {
+  height: 90px;
+  padding: 0;
+  border-top: 1px solid #2e3136;
+  text-align: left;
+}
+
+#footer .partner-inner p {
+  margin-left: 25px;
+  padding: 21px 0;
+}
+
+#footer .splus-logo {
+  vertical-align: middle;
+  margin-left: 32px;
+  width: 64px;
+  height: 48px;
+}
+
 #footer .inner .footer-info {
   float: left;
 }
@@ -104,11 +123,16 @@
   text-align: left;
 }
 
-#footer .about ul {
+#footer .about ul,
+#footer .about ul li a{
   vertical-align: middle;
   list-style: none;
   display: inline-block;
   color: #D6D1E5;
+}
+
+#footer .about ul li a:hover {
+  opacity: 0.5;
 }
 
 #footer .about ul li {
