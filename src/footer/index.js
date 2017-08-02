@@ -58,7 +58,7 @@ export default React.createClass({
         </div>
         <div className="copyright">
           <a href="http://szcert.ebs.org.cn/cd987215-bdcd-4a5e-a936-cc59970970cd" target="_blank">
-            <img src="http://szcert.ebs.org.cn/Images/govIcon.gif" title="深圳市市场监督管理局企业主体身份公示" alt="深圳市市场监督管理局企业主体身份公示" width="20" height="28" border="0" style={{borderWidth:'0px', border: 'none'}} />
+            <img src="http://szcert.ebs.org.cn/Images/govIcon.gif" title="深圳市市场监督管理局企业主体身份公示" alt="深圳市市场监督管理局企业主体身份公示" width="20" height="28" style={{borderWidth:'0px', border: 'none'}} />
           </a>
           <span className="security">
             Copyright &copy; {year} DataEye 深圳市慧动创想科技有限公司
