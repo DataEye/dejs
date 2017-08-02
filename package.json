@@ -1,6 +1,6 @@
 {
   "name": "dejs",
-  "version": "0.6.4",
+  "version": "0.6.7",
   "description": "A collection of utility libraries used by other DataEye JS projects.",
   "repository": {
     "type": "git",
@@ -18,14 +18,15 @@
     "test": "karma start karma.conf.js"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "author": "simonxu",
   "license": "BSD-3-Clause",
   "installable": true,
   "peerDependencies": {
-    "react": ">=0.14.0",
-    "lodash": "4.x",
+    "react": "*",
+    "lodash": "*",
     "superagent": "*",
     "superagent-mocker": "*",
     "numeral": "*",

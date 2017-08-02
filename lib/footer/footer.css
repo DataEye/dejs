@@ -1,0 +1,160 @@
+
+#footer {
+  margin-top: -1px;
+  padding: 15px 0;
+  text-align: center;
+  font-size: 12px;
+  color: #6d7483;
+}
+
+.top-tool {
+  float: right;
+  line-height: 32px;
+  padding: 0 10px;
+}
+
+.top-tool a {
+  float: left;
+  padding: 0 10px;
+  color: #FFFFFF;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+#footer {
+  padding: 10px 0;
+  margin: 0 auto;
+  position: relative;
+  margin: 0 auto;
+  background-color: #252525;
+  font-size: 14px;
+}
+
+#footer .inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: right;
+  zoom: 1;
+}
+
+#footer .inner:after {
+  clear: both;
+  content: ".";
+  display: block;
+  font-size: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+#footer .partner-inner {
+  height: 90px;
+  padding: 0;
+  border-top: 1px solid #2e3136;
+  text-align: left;
+}
+
+#footer .partner-inner p {
+  margin-left: 25px;
+  padding: 21px 0;
+}
+
+#footer .splus-logo {
+  vertical-align: middle;
+  margin-left: 32px;
+  width: 64px;
+  height: 48px;
+}
+
+#footer .inner .footer-info {
+  float: left;
+}
+
+#footer .copyright {
+  line-height: 40px;
+  text-align: center;
+  font-size: 12px;
+  border-top: #4C4C4F 1px solid;
+  padding-top: 15px;
+  color: #757575;
+  /*font-family: Verdana, sans-serif;*/
+}
+
+#footer .copyright a {
+  margin: 0 5px;
+  color: #757575;
+}
+
+#footer .copyright img {
+  vertical-align: middle;
+}
+
+#footer dl {
+  display: inline-block;
+  padding: 0 20px;
+  margin: 20px 15px 40px 0;
+  vertical-align: top;
+  line-height: 25px;
+  text-align: left;
+}
+
+#footer dl dt {
+  font-size: 14px;
+  color: #A5A5A5;
+  margin-bottom: 15px;
+}
+
+#footer dl dd,
+#footer dl dd a {
+  color: #757575;
+  font-size: 12px;
+}
+
+#footer dl dd a:hover {
+  text-decoration: underline;
+}
+
+#footer dd {
+  padding-bottom: 8px;
+}
+
+#footer .about {
+  display: inline-block;
+  margin-top: 20px;
+  text-align: left;
+}
+
+#footer .about ul,
+#footer .about ul li a{
+  vertical-align: middle;
+  list-style: none;
+  display: inline-block;
+  color: #D6D1E5;
+}
+
+#footer .about ul li a:hover {
+  opacity: 0.5;
+}
+
+#footer .about ul li {
+  padding: 6px 0;
+}
+
+#footer .about ul li .fa {
+  display: inline-block;
+  margin-right: 10px;
+  width: 27px;
+  height: 27px;
+  line-height: 27px;
+  background-color: #191919;
+  border-radius: 100px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#footer .about .weixin {
+  vertical-align: middle;
+  display: inline-block;
+  height: 107px;
+  width: 107px;
+  background: url(https://www.dataeye.com/assets/img/weixin.gif) no-repeat;
+}
