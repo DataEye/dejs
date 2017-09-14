@@ -108,10 +108,21 @@ export default function ajax(opts = {}) {
     }
     req.end((err, res) => {
       if (!err) {
+        if (fireGlobals && isFunction(setupConfig.ajaxSuccess)) {
+          let result = res.body || res.text
+          setupConfig.ajaxSuccess.call(req, result, res)
+        }
         res.req = req
         resolve(res)
       } else {
+        if (fireGlobals && isFunction(setupConfig.ajaxError)) {
+          setupConfig.ajaxError.call(req, err, res)
+        }
         reject(err)
+      }
+
+      if (fireGlobals && isFunction(setupConfig.ajaxComplete)) {
+        setupConfig.ajaxComplete.call(req, err, res)
       }
     })
   })
