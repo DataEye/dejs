@@ -51,11 +51,6 @@ export default React.createClass({
             </ul>
           </div>
         </div>
-        <div className="inner partner-inner">
-          <p>
-            <span>旗下品牌:</span><a href="https://www.splus.cn" target="_blank"><img src={`${host}/assets/img/splus_logo.png`} className="splus-logo" /></a>
-          </p>
-        </div>
         <div className="copyright">
           <a href="http://szcert.ebs.org.cn/cd987215-bdcd-4a5e-a936-cc59970970cd" target="_blank">
             <img src="http://szcert.ebs.org.cn/Images/govIcon.gif" title="深圳市市场监督管理局企业主体身份公示" alt="深圳市市场监督管理局企业主体身份公示" width="20" height="28" style={{borderWidth:'0px', border: 'none'}} />
