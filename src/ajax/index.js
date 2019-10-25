@@ -135,11 +135,12 @@ export function get(url, success) {
   })
 }
 
-export function post(url, data, success) {
+export function post(url, data, headers, success) {
   let hasNoDataPost = isFunction(data)
   return ajax({
     url,
     method: 'post',
+    headers: headers,
     data: hasNoDataPost ? null : data,
     success: hasNoDataPost ? data : success
   })
