@@ -128,9 +128,10 @@ export default function ajax(opts = {}) {
   })
 }
 
-export function get(url, success) {
+export function get(url, headers, success) {
   return ajax({
     url,
+    headers,
     success
   })
 }
